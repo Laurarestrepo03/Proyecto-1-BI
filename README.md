@@ -5,6 +5,8 @@ Repositorio con el código fuente del proyecto 1 para la clase Inteligencia de N
 * [Documentos]()
 * [Conjuntos de datos]()
 
+Nota: estos enlaces hacen referencias a archivos en el repositorio. En la wiki se encuentran enlaces de descarga y visualización.
+
 ## Integrantes
 * Gabriel Dicelis
 * Juan Pablo Martínez
