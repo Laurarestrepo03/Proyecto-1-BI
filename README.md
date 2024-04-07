@@ -3,7 +3,7 @@ Repositorio con el código fuente del proyecto 1 para la clase Inteligencia de N
 * [Wiki del proyecto](https://github.com/Laurarestrepo03/Proyecto-1-BI/wiki/Home)
 * [Código de la solución]()
 * [Documentos]()
-* [Conjuntos de datos]()
+* [Conjuntos de datos](https://github.com/Laurarestrepo03/Proyecto-1-BI/tree/main/data)
 
 Nota: estos enlaces hacen referencia a archivos dentro del repositorio. En la wiki se encuentran demás entregables, así como enlaces de descarga y visualización.
 
