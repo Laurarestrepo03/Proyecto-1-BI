@@ -57,7 +57,7 @@ function App() {
               <li>¡Listo! Observa rus resultados a la derecha</li>
             </ol>
             <h4>Reseña:</h4>
-            <textarea value={review} onChange={handleReviewChange} class="form-control" 
+            <textarea value={review} onChange={handleReviewChange} className="form-control" 
                       style={{resize:"none", width:"90vmin", height:"20vmin"}}></textarea>
             <div style={{marginTop: "3vmin"}}>
               <Button variant="primary" onClick={handlePredict}>Predecir</Button>
