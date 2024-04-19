@@ -8,7 +8,7 @@ Repositorio con el código fuente del proyecto 1 para la clase Inteligencia de N
 Nota: estos enlaces hacen referencia a archivos dentro del repositorio. En la wiki se encuentran otros entregables, así como enlaces de visualización.
 
 ## Ejecución de la aplicación
-Ir a la página [Aplicación](https://github.com/Laurarestrepo03/Proyecto-1-BI/wiki/aplicacion) de la wiki.
+Ir a la página [Aplicación](https://github.com/Laurarestrepo03/Proyecto-1-BI/wiki/aplicación) de la wiki.
 
 ## Integrantes
 * Gabriel Dicelis
