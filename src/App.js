@@ -10,6 +10,7 @@ function App() {
   const [stars, setStars] = useState(0)
   const [predictedReview, setPredictedReview] = useState("")
   const [showResults, setshowResults] = useState(false)
+  const [showLoading, setShowLoading] = useState(false)
 
   const handleReviewChange = ((e) => {
     setReview(e.target.value)
@@ -18,6 +19,10 @@ function App() {
   const handlePredict = ((e) => {
     if (review !== "") {
       setPredict(true)
+      setShowLoading(true)
+    }
+    else {
+      alert("Por favor llena el campo de texto")
     }
   });
 
@@ -32,12 +37,14 @@ function App() {
         })
         .then(response => response.json())
         .then(data => {
+          setShowLoading(false)
           console.log(data)
           setPredict(false)
           setshowResults(true)
-          setPredictedReview(review)
+          setPredictedReview(review) // FIX: create func that will make important words bold
           setReview("")
           setStars(Math.floor(Math.random() * 5) + 1) // FIX: set stars to data
+          
         })
     }
   }, [predict, review]);
@@ -53,8 +60,8 @@ function App() {
             <p>Pasos: </p>
             <ol>
               <li>Ingresa una reseña en el campo de texto.</li>
-              <li>Da click en el botón <strong>Predecir</strong></li>
-              <li>¡Listo! Observa rus resultados a la derecha</li>
+              <li>Da click en el botón <strong>Predecir</strong>.</li>
+              <li>¡Listo! Observa tus resultados a la derecha.</li>
             </ol>
             <h4>Reseña:</h4>
             <textarea value={review} onChange={handleReviewChange} className="form-control" 
@@ -64,7 +71,12 @@ function App() {
             </div>   
         </Col>
         <Col style={{marginTop: "3vmin"}}>
-            {showResults && (
+            {showLoading && (
+              <div style={{textAlign: "center"}}>
+                <img alt="loading" height="40" src="https://miro.medium.com/v2/resize:fit:679/1*ngNzwrRBDElDnf2CLF_Rbg.gif"></img>
+              </div>
+            )}
+            {(showResults && !showLoading) && (
               <div style={{marginBottom:"3vmin"}}> 
                 <h4>Resultados:</h4>
                 <h5 style={{color:"gray", marginTop:"2vmin"}}>Palabras clave:</h5>
@@ -77,8 +89,7 @@ function App() {
                   <strong style={{marginLeft:"2vmin", fontSize:"3vmin"}}>{stars}/5</strong>
                 </div>
               </div>
-              )
-            }
+              )}
         </Col> 
       </div> 
     </div>
