@@ -1,0 +1,16 @@
+.Cols {
+    display: flex;
+}
+
+.App-header{
+  text-align: center;
+  margin-top: 2vmin;
+}
+
+.Review {
+  width: 80vmin;
+  height: 20vmin;
+  resize: none;
+}
+
+
