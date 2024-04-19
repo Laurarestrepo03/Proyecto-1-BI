@@ -7,6 +7,11 @@ Repositorio con el código fuente del proyecto 1 para la clase Inteligencia de N
 
 Nota: estos enlaces hacen referencia a archivos dentro del repositorio. En la wiki se encuentran otros entregables, así como enlaces de visualización.
 
+## Ejecución de la aplicación
+0. Instalación de dependencias: `npm install`
+1. Iniciar aplicación: `npm start`
+2. Ingresar a la ruta <http:localhost:3000>
+
 ## Integrantes
 * Gabriel Dicelis
 * Juan Pablo Martínez
