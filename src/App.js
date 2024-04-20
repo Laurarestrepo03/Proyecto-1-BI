@@ -15,6 +15,7 @@ function App() {
   const [showResults, setshowResults] = useState(false)
   const [showLoading, setShowLoading] = useState(false)
   const [keyWords, setKeyWords] = useState([])
+  const [isMounted, setIsMounted] = useState(false);
  
   const handleReviewChange = ((e) => {
     setReview(e.target.value)
@@ -31,7 +32,14 @@ function App() {
   });
 
   useEffect(() => {
-    if (predict) {
+    setIsMounted(true);
+    return () => {
+      setIsMounted(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (predict && isMounted) {
         const PREDICT_URL = `https://fastapi-reviews-app.onrender.com/predict`;
         const WORDS_URL = `https://fastapi-reviews-app.onrender.com/words`;
         // Predict stars
@@ -76,7 +84,7 @@ function App() {
           console.error('Error fetching words:', error);
         });
     }
-  }, [predict, review]);
+  }, [isMounted, predict, review]);
 
   const removeAccents = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -110,7 +118,7 @@ function App() {
               <li>¡Listo! Observa tus resultados a la derecha.</li>
             </ol>
             <h4>Reseña:</h4>
-            <textarea value={review} onChange={handleReviewChange} className="form-control"></textarea>
+            <textarea value={review} onChange={handleReviewChange} className="form-control" id="review"></textarea>
             <div className="mt-3">
               <Button variant="primary" onClick={handlePredict}>Predecir</Button>
             </div>   
