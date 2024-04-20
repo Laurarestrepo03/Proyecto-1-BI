@@ -13,4 +13,25 @@
   resize: none;
 }
 
+.Rating {
+  margin-left: 2vmin;
+  font-size: 3vmin;
+}
+
+.Flex-center {
+  display: flex;
+  align-items: center;
+}
+
+h5 {
+  color: gray !important;
+  margin: 0 !important;
+}
+
+textarea {
+  resize: none !important;
+  width: 90vmin !important;
+  height: 20vmin !important;
+}
+
 
