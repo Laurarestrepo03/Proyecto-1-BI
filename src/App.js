@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import './App.css';
 import { Col, Button } from "react-bootstrap";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { IoIosStar } from "react-icons/io";
 import { Tooltip } from "react-tooltip";
 import { LuInfo } from "react-icons/lu";
@@ -9,13 +9,11 @@ import { LuInfo } from "react-icons/lu";
 function App() {
 
   const [review, setReview] = useState("")
-  const [predict, setPredict] = useState(false)
   const [stars, setStars] = useState(0)
   const [predictedReview, setPredictedReview] = useState("")
   const [showResults, setshowResults] = useState(false)
   const [showLoading, setShowLoading] = useState(false)
-  const [keyWords, setKeyWords] = useState([])
-  const [isMounted, setIsMounted] = useState(false);
+  const [keyWords, setKeyWords] = useState([]);
  
   const handleReviewChange = ((e) => {
     setReview(e.target.value)
@@ -23,7 +21,8 @@ function App() {
 
   const handlePredict = ((e) => {
     if (review !== "") {
-      setPredict(true)
+      fetchPredict(review)
+      fetchWords(review)
       setShowLoading(true)
     }
     else {
@@ -31,60 +30,51 @@ function App() {
     }
   });
 
-  useEffect(() => {
-    setIsMounted(true);
-    return () => {
-      setIsMounted(false);
-    };
-  }, []);
+  const fetchPredict = (review) => {
+    const URL = `https://fastapi-reviews-app.onrender.com/predict`;
+    fetch(URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      Review: review
+    }),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      setStars(data.prediction)
+    })
+    .catch(error => {
+      console.error('Error fetching prediction:', error);
+    });
+  };
 
-  useEffect(() => {
-    if (predict && isMounted) {
-        const PREDICT_URL = `https://fastapi-reviews-app.onrender.com/predict`;
-        const WORDS_URL = `https://fastapi-reviews-app.onrender.com/words`;
-        // Predict stars
-        fetch(PREDICT_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          Review: review
-        }),
-        })
-        .then(response => response.json())
-        .then(data => {
-          setPredict(false)
-          console.log(data)
-          setStars(data.prediction)
-        })
-        .catch(error => {
-          console.error('Error fetching prediction:', error);
-        });
-        // Keywords
-        fetch(WORDS_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            Review: review
-          }),
-          })
-        .then(response => response.json())
-        .then(data => {
-          setShowLoading(false)
-          console.log(data)
-          setKeyWords(data.words)
-          setPredictedReview(review)  
-          setshowResults(true)
-          setReview("")
-        })
-        .catch(error => {
-          console.error('Error fetching words:', error);
-        });
-    }
-  }, [isMounted, predict, review]);
+  const fetchWords = (review) => {
+    const URL = `https://fastapi-reviews-app.onrender.com/words`;
+    fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        Review: review
+      }),
+      })
+    .then(response => response.json())
+    .then(data => {
+      setShowLoading(false)
+      console.log(data)
+      setKeyWords(data.words)
+      setPredictedReview(review)  
+      setshowResults(true)
+      setReview("")
+    })
+    .catch(error => {
+      console.error('Error fetching words:', error);
+    });
+  }
 
   const removeAccents = (str) => {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -95,8 +85,7 @@ function App() {
     const words = text.split(' ');
   
     const boldedText = words.map((word, index) => {
-      const lowerCaseWord = removeAccents(word.toLowerCase()); 
-      const isStartOfWord = keyWords.some(keyword => lowerCaseText.startsWith(removeAccents(keyword.toLowerCase()), lowerCaseText.indexOf(lowerCaseWord)));
+      const isStartOfWord = keyWords.some(keyword => lowerCaseText.startsWith(keyword, lowerCaseText.indexOf(word)));
       return isStartOfWord ? <strong key={index}>{word}</strong> : word;
     });
   
