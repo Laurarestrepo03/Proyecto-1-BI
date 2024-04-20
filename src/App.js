@@ -69,8 +69,6 @@ function App() {
           console.log(data)
           setKeyWords(data.words)
           setPredictedReview(review)  
-        })
-        .then(_ => {
           setshowResults(true)
           setReview("")
         })
