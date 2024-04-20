@@ -13,7 +13,17 @@ function App() {
   const [predictedReview, setPredictedReview] = useState("")
   const [showResults, setshowResults] = useState(false)
   const [showLoading, setShowLoading] = useState(false)
-  const [keyWords, setKeyWords] = useState([]);
+  const [keyWords, setKeyWords] = useState([])
+  const [predictError, setPredictError] = useState(false)
+  const [wordsError, setWordsError] = useState(false);
+
+  const errorText = (
+    <div>
+      <p className="mt-3">
+        <span className="Error-text"> Hubo un error. Intenta de nuevo.</span>
+      </p>
+    </div> 
+  )
  
   const handleReviewChange = ((e) => {
     setReview(e.target.value)
@@ -45,9 +55,11 @@ function App() {
     .then(data => {
       console.log(data)
       setStars(data.prediction)
+      setPredictError(false);
     })
     .catch(error => {
       console.error('Error fetching prediction:', error);
+      setPredictError(true);
     });
   };
 
@@ -67,12 +79,14 @@ function App() {
       setShowLoading(false)
       console.log(data)
       setKeyWords(data.words)
+      setWordsError(false)
       setPredictedReview(review)  
       setshowResults(true)
       setReview("")
     })
     .catch(error => {
       console.error('Error fetching words:', error);
+      setWordsError(true)
     });
   }
 
@@ -121,7 +135,7 @@ function App() {
             {(showResults && !showLoading) && (
               <div className="mb-3" style={{marginRight:"3vmin"}}> 
                 <h4 className="mb-2">Resultados:</h4>
-                <div className="Flex-center mt-2">
+                <div className="Flex-center mt-2 mb-1">
                   <h5>Palabras clave:</h5>
                   <a  data-tooltip-id="info" 
                   data-tooltip-html="Las palabras resaltadas hacen referencia al top 300 <br/> de palabras clave del modelo de entrenamiento"> 
@@ -129,14 +143,20 @@ function App() {
                   </a>
                   <Tooltip id="info" place="right"></Tooltip>
                 </div>
-                <p className="mt-1">{makeBold(predictedReview)}</p>
-                <h5 className="mt-2">Calificación:</h5>
-                <div className="Flex-center mt-1">
-                  {[...Array(5)].map((_, index) => (
-                    <IoIosStar key={index} style={{ color: index < stars ? "gold" : "gray" }} size={30}/>
-                  ))}
-                  <strong className="Rating">{stars}/5</strong>
-                </div>
+                {(!wordsError && 
+                  <p>{makeBold(predictedReview)}</p>
+                )}
+                {(wordsError && errorText)}
+                <h5 className="mt-2 mb-1">Calificación:</h5>
+                {(!predictError &&
+                  <div className="Flex-center">
+                    {[...Array(5)].map((_, index) => (
+                      <IoIosStar key={index} style={{ color: index < stars ? "gold" : "gray" }} size={30}/>
+                    ))}
+                    <strong className="Rating">{stars}/5</strong>
+                  </div>
+                )}
+                {(predictError && errorText)}
               </div>
               )}
         </Col> 

@@ -23,6 +23,13 @@
   align-items: center;
 }
 
+.Error-text {
+  background-color: #ffc7cd;
+  color: #9c0007;
+  padding: 1vmin;
+  border-radius: 0.5vmin;
+}
+
 h5 {
   color: gray !important;
   margin: 0 !important;
