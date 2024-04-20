@@ -127,7 +127,7 @@ function App() {
                 <div className="Flex-center mt-2">
                   <h5>Palabras clave:</h5>
                   <a  data-tooltip-id="info" 
-                  data-tooltip-html="Las palabras resaltadas hacen referencia al top 50 <br/> de palabras clave del modelo de entrenamiento"> 
+                  data-tooltip-html="Las palabras resaltadas hacen referencia al top 300 <br/> de palabras clave del modelo de entrenamiento"> 
                     <LuInfo style={{ color:"#2196f3", marginLeft:"1vmin" }} ></LuInfo> 
                   </a>
                   <Tooltip id="info" place="right"></Tooltip>
