@@ -82,7 +82,6 @@ function App() {
       setWordsError(false)
       setPredictedReview(review)  
       setshowResults(true)
-      
     })
     .then(_ => {
       setReview("")
