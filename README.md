@@ -11,6 +11,6 @@ Nota: estos enlaces hacen referencia a archivos dentro del repositorio. En la wi
 Ir a la página [Aplicación](https://github.com/Laurarestrepo03/Proyecto-1-BI/wiki/aplicación) de la wiki.
 
 ## Integrantes
-* Gabriel Dicelis
-* Juan Pablo Martínez
-* Laura Restrepo
+* Gabriel Dicelis [@GabrielFDR7](https://github.com/GabrielFDR7)
+* Juan Pablo Martínez [@JP-514](https://github.com/JP-514)
+* Laura Restrepo [@Laurarestrepo03](https://github.com/Laurarestrepo03)
